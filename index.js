@@ -7,7 +7,7 @@ const searchInput=document.getElementById("search");
 
 
     async function loadData(searchString){
-      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchString}&key=${apikey}
+      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${searchString}&key=${apikey}
       `;
       const response=await fetch(url);
       const data=await response.json();
