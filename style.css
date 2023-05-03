@@ -1,5 +1,5 @@
 body{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
 }
 
 *{
@@ -257,14 +257,22 @@ button:hover{
      margin:2px;
 }
 
-.video:hover>.tumbnile{
+.video:hover .thumbnail{
     border-radius: 0;
 }
 
-.tumbnile{
+.video_image_container{
+    display: flex;
+    /* border: 1px solid orange; */
+    border-radius: 10px;
+}
+
+.thumbnail{
     border-radius: 20px;
     height: 180px;
     transition:1s;
+    width: 100%;
+    /* border: 1px solid blue; */
 }
 
 .info-container{

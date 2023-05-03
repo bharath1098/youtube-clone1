@@ -5,6 +5,7 @@ const video_container=document.getElementById("video-container");
 
 const searchInput=document.getElementById("search");
 
+
     async function loadData(searchString){
       const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchString}&key=${apikey}
       `;
@@ -63,10 +64,10 @@ const searchInput=document.getElementById("search");
             const channelId=videoItem.snippet.channelId;
             const title=videoItem.snippet.title;
             // const description=videoItem.snippet.description;
-            const thumbnail=videoItem.snippet.thumbnails.medium.url;
+            const thumbnail=videoItem.snippet.thumbnails.medium.url; 
             const channelName=videoItem.snippet.channelTitle;
             const videoUploadedTime=videoItem.snippet.publishTime;
-            const video_url = `https://www.youtube.com/embed/${videoId}?autoplay&enablejsapi=1&origin=${`https://www.google.com`}`;
+            const video_url = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&enablejsapi=1&origin=${`https://www.google.com`}`;
             const channelLogo=await loadChannelLogo(channelId);
             const viewCount=await loadViewCount(videoId);
             
@@ -76,16 +77,40 @@ const searchInput=document.getElementById("search");
        
       const videoCard=document.createElement("div");
       videoCard.className="video";
+         
+        const video_img_container=document.createElement("div");
+         video_img_container.className="video_image_container";
+         const thumbnailElement=document.createElement("img");
+         thumbnailElement.className="thumbnail";
+         thumbnailElement.setAttribute("id","clip");
+         thumbnailElement.src=thumbnail;
+         video_img_container.appendChild(thumbnailElement);
 
-      // <video controls poster="tumbnile-url" src="video-url" type="video/mp4" class="tumbnile"></video>
-      const thumbnailElement=document.createElement("iframe");
-      thumbnailElement.className="tumbnile";
-      thumbnailElement.setAttribute("id","clip");
-      // thumbnailElement.poster=thumbnail;
-      thumbnailElement.src=video_url;
-      thumbnailElement.controls=true;
-      thumbnailElement.allowFullscreen=true;
-      videoCard.appendChild(thumbnailElement);
+         
+      videoCard.appendChild(video_img_container);
+
+     await videoCard.addEventListener("mouseenter",()=>{
+          video_img_container.innerHTML="";
+          const iframe=document.createElement("iframe");
+          iframe.className="thumbnail";
+          iframe.src=video_url;
+          iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen=true;
+          iframe.controls=true;
+          video_img_container.appendChild(iframe);
+          
+       });
+
+    await  videoCard.addEventListener("mouseleave",()=>{
+           video_img_container.innerHTML="";
+         const img=document.createElement("img");
+           img.className="thumbnail";
+           img.src=thumbnail;
+           img.ariaPlaceholder="thumbnail";
+           video_img_container.appendChild(img);
+      });
+
+
       
 
       const info_container=document.createElement("div");
@@ -144,7 +169,7 @@ const searchInput=document.getElementById("search");
       }
  
       async function loadVideoBasedOnCatogeriesId(id,searchString=""){
-      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchString}&type=video&videoCategoryId=${id}&key=${apikey}`;
+      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${searchString}&type=video&videoCategoryId=${id}&key=${apikey}`;
 
       const response=await fetch(url);
       const data=await response.json();
@@ -200,7 +225,7 @@ const searchInput=document.getElementById("search");
       }
 
       async function loadViewCount(videoId){
-      // const url=`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${apikey}`;
+
       const url=`https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${apikey}
       `;
       const response=await fetch(url);
@@ -210,15 +235,12 @@ const searchInput=document.getElementById("search");
       }
 
 
-      // const clip=document.getElementById("clip");
-      // clip.addEventListener("mouseover",()=>{clip.play();console.log("play");});
-      // clip.addEventListener("mouseout",()=>{clip.pause();console.log("pause");});
-      // clip.addEventListener("click",()=>{clip.requestFullscreen();console.log("fullscreen");});
-      // clip.addEventListener("dblclick",()=>{clip.exitFullScreen();console.log("out");});
-
-      
-      // chip.addEventListener("click",()=>{loadVideoBasedOnCatogeriesId("chip_id");});
-
       loadvideoCatogeries();
 
       
+
+
+
+
+ 
+
