@@ -1,4 +1,4 @@
-const apikey="AIzaSyBN-gkyIhhD0K89Jlw90WlKkDyaBpEpjQM";
+const apikey="AIzaSyBZHPtGorhQ7WY43bVIxblMHa8kEo6t-i0";
 const categories_container=document.getElementById("chips-container");
 const video_container=document.getElementById("video-container");
 
@@ -239,8 +239,5 @@ const searchInput=document.getElementById("search");
 
       
 
-
-
-
- 
-
+          
+          

@@ -69,6 +69,14 @@ body{
     transform:scale(1.02);
 }
 
+.menu-name{
+    text-decoration: none;
+    font-size: 16px;
+    color:black;
+    cursor: pointer;
+    padding: 3px 30% 3px 0px;
+}
+
 .line-seperator{
   width:100%;
   height:2px;
@@ -251,7 +259,7 @@ button:hover{
 
 .video-container::-webkit-scrollbar {
     /* width:0px;  adjust the width as needed */
-    width:10px;
+       width:10px;
   }
   
 .video-container::-webkit-scrollbar-thumb {
@@ -343,4 +351,75 @@ button:hover{
     height:4px;
     background: #888686;
     border-radius: 3px;
+}
+
+
+.shots-container{
+    display: flex;
+    height: 100%;
+    /* justify-content: center; */
+    align-items: center;
+    gap:15px;
+}
+
+
+.shots-video{
+    height:90%;
+    border-radius: 10px;
+    margin-left: 25%;
+}
+
+.shots-video>iframe{
+    height: 100%;
+    border-radius: 10px;
+}
+
+.shots-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    height:70%;
+    width:50px;
+    gap:20px;
+
+}
+
+
+
+.like-share-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #e2e0e0;
+    color: black;
+}
+
+.like-share-btn:hover{
+    background-color: #7e7d7d;
+}
+
+
+
+.shots-controls{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+    padding-left: 33%;
+}
+
+.shots-controls>button{
+    background-color: #ece7e7;
+    border: 0;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+
+.shots-controls>button:hover{
+    background-color: #bdb5b5;
 }
