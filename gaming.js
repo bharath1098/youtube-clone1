@@ -1,6 +1,6 @@
-const apikey="AIzaSyB2IOEGW8hu7p-jKksthGFcQlvxyb2cs9k";
-const categories_container=document.getElementById("chips-container");
-const video_container=document.getElementById("video-container");
+const apikey="AIzaSyB2IOEGW8hu7p-jKksthGFcQlvxyb2cs9k";  
+const sub_video_container=document.getElementById("sub-video-container");
+const gaming_btn=document.getElementById("gaming");
 
 
 const searchInput=document.getElementById("search");
@@ -11,53 +11,29 @@ const searchInput=document.getElementById("search");
       `;
       const response=await fetch(url);
       const data=await response.json();
-      loadVideoBasedOnVideosList(data);
+      loadSubscriptionVideoBasedOnVideosList(data);
     } 
 
 
      searchInput.addEventListener("change",(e)=>{
       const searchString=e.target.value;
       loadData(searchString); });
+    
 
+          
+    async function loadSubscriptionData(e){
+          e.preventDefault();
+      const searchString="top games and games streaming videos";
+      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelType=any&type=video&q=${searchString}&key=${apikey}
+      `;
+      const response=await fetch(url);
+      const data=await response.json();
+      loadSubscriptionVideoBasedOnVideosList(data);
+     }
 
-// //chips container and video container
-
-
-
-    async function loadvideoCatogeries(){
-      let str="10,17,20,15,1,18,19,2,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44";
-      const url = `https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&key=${apikey}&id=${str}`;
-      
-      const response= await fetch(url);
-      const data= await response.json();
-       appendChips(data.items);
-      loadVideoBasedOnCatogeriesId("23");
-      }
-       
-
-     async function appendChips(chips){
-
-      for(let i=0;i<chips.length;i++){
-            const  id=chips[i].id;
-            const title=chips[i].snippet.title;
-            const chip=document.createElement("div");
-            chip.setAttribute("id",id);
-            chip.className="chips";
-            chip.innerText=title;
-            categories_container.appendChild(chip);
-            // console.log(chip);
-            chip.addEventListener("click",(e)=>{
-                  const catogery_id=e.target.id;
-                  loadVideoBasedOnCatogeriesId(catogery_id);
-            });
-      }
-
-      }
-
-
-     async function loadVideoBasedOnVideosList(data){
+     async function loadSubscriptionVideoBasedOnVideosList(data){
       //remove previous data 
-      video_container.innerHTML="";
+      sub_video_container.innerHTML="";
       for(let i=0;i<data.items.length;i++){
             //we are looking for single video item inside this loop
             const videoItem=data.items[i];
@@ -77,12 +53,12 @@ const searchInput=document.getElementById("search");
        //video card creating
        
       const videoCard=document.createElement("div");
-      videoCard.className="video";
+      videoCard.className="sub-video";
          
         const video_img_container=document.createElement("div");
-         video_img_container.className="video_image_container";
+         video_img_container.className="sub-video_image_container";
          const thumbnailElement=document.createElement("img");
-         thumbnailElement.className="thumbnail";
+         thumbnailElement.className="sub-thumbnail";
          thumbnailElement.setAttribute("id","clip");
          thumbnailElement.src=thumbnail;
          video_img_container.appendChild(thumbnailElement);
@@ -93,7 +69,7 @@ const searchInput=document.getElementById("search");
      await videoCard.addEventListener("mouseenter",()=>{
           video_img_container.innerHTML="";
           const iframe=document.createElement("iframe");
-          iframe.className="thumbnail";
+          iframe.className="sub-thumbnail";
           iframe.src=video_url;
           iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
           iframe.allowFullscreen=true;
@@ -105,7 +81,7 @@ const searchInput=document.getElementById("search");
     await  videoCard.addEventListener("mouseleave",()=>{
            video_img_container.innerHTML="";
          const img=document.createElement("img");
-           img.className="thumbnail";
+           img.className="sub-thumbnail";
            img.src=thumbnail;
            img.ariaPlaceholder="thumbnail";
            video_img_container.appendChild(img);
@@ -115,13 +91,13 @@ const searchInput=document.getElementById("search");
       
 
       const info_container=document.createElement("div");
-           info_container.className="info-container";
+           info_container.className="sub-info-container";
        
       const logo_container=document.createElement("div"); 
-            logo_container.className="logo-container";
+            logo_container.className="sub-logo-container";
 
       const logo=document.createElement("img");
-            logo.className="logo";
+            logo.className="sub-logo";
             logo.src=channelLogo;
             logo_container.appendChild(logo);
 
@@ -129,33 +105,33 @@ const searchInput=document.getElementById("search");
 
         
       const detail_container=document.createElement("div");
-            detail_container.className="detail-container";     
+            detail_container.className="sub-detail-container";     
            
       const video_title=document.createElement("p");
-            video_title.className="video-title";
+            video_title.className="sub-video-title";
             video_title.innerText=title;
             detail_container.appendChild(video_title);
 
        const channel_Name=document.createElement("p");
-            channel_Name.className="channel-name";
+            channel_Name.className="sub-channel-name";
             channel_Name.innerText=channelName;
             detail_container.appendChild(channel_Name);  
 
            
       const stats=document.createElement("div");
-            stats.className="stats";
+            stats.className="sub-stats";
 
       const view_count=document.createElement("span");
-            view_count.className="view-count";
+            view_count.className="sub-view-count";
             view_count.innerText=viewCountInStandardForm(viewCount);
             stats.appendChild(view_count);      
       
       const dot=document.createElement("div");
-            dot.className="dot";
+            dot.className="sub-dot";
             stats.appendChild(dot);
 
       const time=document.createElement("div");
-            time.className="time";
+            time.className="sub-time";
             time.innerText=videoUploadedTimeToCurrentTime(videoUploadedTime);
             stats.appendChild(time);
 
@@ -164,20 +140,13 @@ const searchInput=document.getElementById("search");
             info_container.appendChild(detail_container);
 
             videoCard.appendChild(info_container);
-            video_container.appendChild(videoCard);
+            sub_video_container.appendChild(videoCard);
 
-       }
       }
- 
-      async function loadVideoBasedOnCatogeriesId(id,searchString=""){
-      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${searchString}&type=video&videoCategoryId=${id}&key=${apikey}`;
-
-      const response=await fetch(url);
-      const data=await response.json();
-      loadVideoBasedOnVideosList(data);
-      
       }
 
+
+    
       function viewCountInStandardForm(viewCount){
             if(viewCount>1000000){
                   return Math.floor(viewCount/1000000)+"M views"
@@ -236,10 +205,7 @@ const searchInput=document.getElementById("search");
       }
 
 
-      loadvideoCatogeries();
-
-
-
-
-
+ 
+     gaming_btn.addEventListener("click",loadSubscriptionData);      
+      
       

@@ -1,15 +1,39 @@
- const apikey1="AIzaSyBZHPtGorhQ7WY43bVIxblMHa8kEo6t-i0";
-// c_ID=42
+
+const apikey="AIzaSyB2IOEGW8hu7p-jKksthGFcQlvxyb2cs9k";
+const shots_btn=document.getElementById("shots");
 let shorts_video_array=[];
-async function shorts_video_loading(searchString=""){
-    const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${searchString}&type=video&videoCategoryId=${42}&key=${apikey1}`;
+
+
+
+const searchInput=document.getElementById("search");
+
+
+    async function loadData(searchString){
+      const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&channelType=any&type=video&q=${searchString}&key=${apikey}`;
+      const response=await fetch(url);
+      const data=await response.json();
+      shorts_video_array=data.items;
+    } 
+
+
+     searchInput.addEventListener("change",(e)=>{
+      const searchString=e.target.value;
+      loadData(searchString); });
+
+
+
+// c_ID=42
+
+async function shorts_video_loading(e,searchString=""){
+     e.preventDefault();
+    const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${searchString}&type=video&videoCategoryId=${42}&key=${apikey}`;
     const response=await fetch(url);
     const data=await response.json();
     shorts_video_array=data.items;
 }
 
 
-shorts_video_loading();
+  shots_btn.addEventListener("click",shorts_video_loading);
 
 
     let currentIndex = 0;
@@ -36,5 +60,4 @@ shorts_video_loading();
       }
       updateCurrentItem();
     });
-
 
