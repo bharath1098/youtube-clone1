@@ -20,7 +20,7 @@ const searchInput=document.getElementById("search");
 
 
     async function loadHistoryVideoData(e){
-      e.preventDefault();
+      // e.preventDefault();
        const searchString="kannada comedys and kannda new songs and new movie trailers";
        const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelType=any&type=video&q=${searchString}&key=${apikey}
        `;
@@ -197,4 +197,4 @@ return data.items[0].statistics.viewCount;
 
 
 
- history_video_btn.addEventListener("click",loadHistoryVideoData);
+  loadHistoryVideoData();

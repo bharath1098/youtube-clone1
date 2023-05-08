@@ -21,7 +21,7 @@ const searchInput=document.getElementById("search");
 
 
  async function loadLikedVideoData(e){
-      e.preventDefault();
+      
   const searchString="kannada new released songs and triller videos";
   const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelType=any&type=video&q=${searchString}&key=${apikey}
   `;
@@ -209,5 +209,5 @@ return data.items[0].statistics.viewCount;
 
 
 
-liked_video_btn.addEventListener("click",loadLikedVideoData);
+loadLikedVideoData();
 

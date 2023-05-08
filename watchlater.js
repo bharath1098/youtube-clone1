@@ -25,7 +25,7 @@ const searchInput=document.getElementById("search");
 
   
        async function loadWatchLaterVideoData(e){
-            e.preventDefault();
+            // e.preventDefault();
         const searchString="kannada news channel and content oriented channel";
         const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelType=any&type=video&q=${searchString}&key=${apikey}
         `;
@@ -211,5 +211,5 @@ const searchInput=document.getElementById("search");
       }
    
  
-        watch_later_video_btn.addEventListener("click",loadWatchLaterVideoData);
+        loadWatchLaterVideoData();
 

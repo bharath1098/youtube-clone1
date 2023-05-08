@@ -25,7 +25,7 @@ const searchInput=document.getElementById("search");
 // c_ID=42
 
 async function shorts_video_loading(e,searchString=""){
-     e.preventDefault();
+    //  e.preventDefault();
     const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&q=${searchString}&type=video&videoCategoryId=${42}&key=${apikey}`;
     const response=await fetch(url);
     const data=await response.json();
@@ -33,7 +33,7 @@ async function shorts_video_loading(e,searchString=""){
 }
 
 
-  shots_btn.addEventListener("click",shorts_video_loading);
+  shorts_video_loading();
 
 
     let currentIndex = 0;

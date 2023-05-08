@@ -22,7 +22,7 @@ const searchInput=document.getElementById("search");
 
           
     async function loadLibraryData(e){
-      e.preventDefault();
+      // e.preventDefault();
       const searchString="kannada songs and comedy videos and movie explained videos";
       const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelType=any&type=video&q=${searchString}&key=${apikey}
       `;
@@ -206,6 +206,6 @@ const searchInput=document.getElementById("search");
 
 
  
-     library_btn.addEventListener("click",loadLibraryData);      
+     loadLibraryData();      
       
       

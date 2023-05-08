@@ -22,7 +22,7 @@ const searchInput=document.getElementById("search");
 
           
     async function loadSubscriptionData(e){
-          e.preventDefault();
+      //     e.preventDefault();
       const searchString="top trending songs and videos";
       const url=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelType=any&type=video&q=${searchString}&key=${apikey}
       `;
@@ -206,6 +206,6 @@ const searchInput=document.getElementById("search");
 
 
  
-     trending_btn.addEventListener("click",loadSubscriptionData);      
+     loadSubscriptionData();      
       
       
