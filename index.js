@@ -235,7 +235,7 @@ const searchInput=document.getElementById("search");
       }
 
 
-      // loadvideoCatogeries();
+      loadvideoCatogeries();
 
       
 
