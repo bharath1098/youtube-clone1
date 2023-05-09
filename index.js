@@ -31,7 +31,12 @@ const searchInput=document.getElementById("search");
       const response= await fetch(url);
       const data= await response.json();
        appendChips(data.items);
-      loadVideoBasedOnCatogeriesId("23");
+        const searchString="top trending videos and new realised movie trailers and songs videos";
+        const url1=`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&channelType=any&type=video&q=${searchString}&key=${apikey}
+      `;
+      const response1=await fetch(url1);
+      const data1=await response1.json();
+      loadVideoBasedOnVideosList(data1);
       }
        
 
